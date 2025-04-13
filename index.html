@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Typing Master</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional game styles */
+        .game-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        [data-theme="dark"] .game-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+        }
+        
+        .level-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            background-color: var(--card-bg);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .level-bar {
+            height: 12px;
+            background: var(--code-bg);
+            border-radius: 6px;
+            flex-grow: 1;
+            margin: 0 1rem;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .level-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.5s ease-out;
+            border-radius: 6px;
+        }
+        
+        .combo-counter {
+            background: var(--danger-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(248, 37, 133, 0.3);
+            transform: scale(0);
+            transition: transform 0.3s;
+        }
+        
+        .combo-counter.show {
+            transform: scale(1);
+            animation: pulseCombo 0.5s alternate infinite;
+        }
+        
+        @keyframes pulseCombo {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .typing-container.zoom {
+            transform: scale(1.02);
+        }
+        
+        .floating-notification {
+            position: absolute;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            animation: floatUp 1s forwards;
+            z-index: 100;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        
+        /* Keyboard key animations */
+        .keyboard-key.next-key {
+            animation: pulseGlow 1.5s infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        .keyboard-key.active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 var(--key-shadow);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-keyboard"></i> CodeTyping
+            </div>
+            <div class="nav-controls">
+                <button id="theme-btn" class="nav-btn" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="help-btn" class="nav-btn" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="game-header">
+            <h1><i class="fas fa-keyboard"></i> CODE TYPING MASTER</h1>
+            <p>Level up your programming typing skills!</p>
+        </div>
+        
+        <div class="level-indicator">
+            <span>Level 1</span>
+            <div class="level-bar">
+                <div class="level-progress" id="level-progress"></div>
+            </div>
+            <div class="combo-counter" id="combo-counter">0x Combo!</div>
+        </div>
+
+        <div class="control-panel">
+            <div class="language-selector">
+                <label for="language-select">Language:</label>
+                <select id="language-select">
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="cpp">C++</option>
+                    <option value="html">HTML</option>
+                    <option value="rust">Rust</option>
+                    <option value="golang">Go</option>
+                    <option value="sql">SQL</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="ruby">Ruby</option>
+                </select>
+            </div>
+
+            <div class="action-buttons">
+                <button id="start-btn" class="btn primary">
+                    <i class="fas fa-play"></i> START CHALLENGE
+                </button>
+                <button id="stop-btn" class="btn danger" disabled>
+                    <i class="fas fa-stop"></i> STOP
+                </button>
+                <button id="new-snippet-btn" class="btn secondary">
+                    <i class="fas fa-sync-alt"></i> NEW CODE
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <div class="stat-value" id="wpm">0</div>
+                <div class="stat-label">WPM</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="accuracy">100%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="timer">0:00</div>
+                <div class="stat-label">Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="errors">0</div>
+                <div class="stat-label">Errors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="score">0</div>
+                <div class="stat-label">Score</div>
+            </div>
+        </div>
+
+        <div class="typing-container" id="typing-container">
+            <div id="code-display" class="code-display"></div>
+            <textarea id="code-input" class="code-input" placeholder="Press START to begin your challenge..." disabled></textarea>
+        </div>
+
+        <div class="virtual-keyboard-container">
+            <div class="keyboard-section">
+                <div class="keyboard-row">
+                    <div class="key keyboard-key" data-key="`">`</div>
+                    <div class="key keyboard-key" data-key="1">1</div>
+                    <div class="key keyboard-key" data-key="2">2</div>
+                    <div class="key keyboard-key" data-key="3">3</div>
+                    <div class="key keyboard-key" data-key="4">4</div>
+                    <div class="key keyboard-key" data-key="5">5</div>
+                    <div class="key keyboard-key" data-key="6">6</div>
+                    <div class="key keyboard-key" data-key="7">7</div>
+                    <div class="key keyboard-key" data-key="8">8</div>
+                    <div class="key keyboard-key" data-key="9">9</div>
+                    <div class="key keyboard-key" data-key="0">0</div>
+                    <div class="key keyboard-key" data-key="-">-</div>
+                    <div class="key keyboard-key" data-key="=">=</div>
+                    <div class="key keyboard-key special-key" data-key="Backspace">⌫</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key keyboard-key special-key" data-key="Tab">⇥</div>
+                    <div class="key keyboard-key" data-key="q">Q</div>
+                    <div class="key keyboard-key" data-key="w">W</div>
+                    <div class="key keyboard-key" data-key="e">E</div>
+                    <div class="key keyboard-key" data-key="r">R</div>
+                    <div class="key keyboard-key" data-key="t">T</div>
+                    <div class="key keyboard-key" data-key="y">Y</div>
+                    <div class="key keyboard-key" data-key="u">U</div>
+                    <div class="key keyboard-key" data-key="i">I</div>
+                    <div class="key keyboard-key" data-key="o">O</div>
+                    <div class="key keyboard-key" data-key="p">P</div>
+                    <div class="key keyboard-key" data-key="[">[</div>
+                    <div class="key keyboard-key" data-key="]">]</div>
+                    <div class="key keyboard-key" data-key="\">\</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key keyboard-key special-key" data-key="Caps">⇪</div>
+                    <div class="key keyboard-key" data-key="a">A</div>
+                    <div class="key keyboard-key" data-key="s">S</div>
+                    <div class="key keyboard-key" data-key="d">D</div>
+                    <div class="key keyboard-key" data-key="f">F</div>
+                    <div class="key keyboard-key" data-key="g">G</div>
+                    <div class="key keyboard-key" data-key="h">H</div>
+                    <div class="key keyboard-key" data-key="j">J</div>
+                    <div class="key keyboard-key" data-key="k">K</div>
+                    <div class="key keyboard-key" data-key="l">L</div>
+                    <div class="key keyboard-key" data-key=";">;</div>
+                    <div class="key keyboard-key" data-key="'">'</div>
+                    <div class="key keyboard-key special-key" data-key="Enter">↩</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key keyboard-key special-key" data-key="Shift">⇧</div>
+                    <div class="key keyboard-key" data-key="z">Z</div>
+                    <div class="key keyboard-key" data-key="x">X</div>
+                    <div class="key keyboard-key" data-key="c">C</div>
+                    <div class="key keyboard-key" data-key="v">V</div>
+                    <div class="key keyboard-key" data-key="b">B</div>
+                    <div class="key keyboard-key" data-key="n">N</div>
+                    <div class="key keyboard-key" data-key="m">M</div>
+                    <div class="key keyboard-key" data-key=",">,</div>
+                    <div class="key keyboard-key" data-key=".">.</div>
+                    <div class="key keyboard-key" data-key="/">/</div>
+                    <div class="key keyboard-key special-key" data-key="Shift">⇧</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key keyboard-key extra-wide special-key" data-key=" ">␣ Space</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Challenge Results</h2>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="result-value" id="final-wpm">0</span>
+                    <span class="result-label">WPM</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-value" id="final-accuracy">100%</span>
+                    <span class="result-label">Accuracy</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-value" id="final-time">0:00</span>
+                    <span class="result-label">Time</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-value" id="final-score">0</span>
+                    <span class="result-label">Score</span>
+                </div>
+            </div>
+            <div class="performance-comment" id="performance-comment"></div>
+            <button id="close-modal-btn" class="btn primary">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <div class="modal" id="idle-modal">
+        <div class="modal-content">
+            <h2>Inactive Detected</h2>
+            <p>You haven't typed anything for 8 seconds. Challenge reset.</p>
+            <button id="close-idle-modal-btn" class="btn primary">CONTINUE</button>
+        </div>
+    </div>
+
+    <div class="modal" id="help-modal">
+        <div class="modal-content">
+            <h2>How to Play</h2>
+            <div class="help-content">
+                <h3><i class="fas fa-keyboard"></i> Touch Typing Guide</h3>
+                <p>1. Keep your fingers on the home row (ASDF-JKL;)</p>
+                <p>2. Use the highlighted keys on the virtual keyboard as a guide</p>
+                <p>3. Try not to look at your physical keyboard</p>
+                <p>4. Start slow and focus on accuracy first</p>
+                
+                <h3><i class="fas fa-trophy"></i> Scoring</h3>
+                <p>- <strong>WPM</strong>: Words per minute (5 chars = 1 word)</p>
+                <p>- <strong>Accuracy</strong>: Percentage of correct characters</p>
+                <p>- <strong>Combo</strong>: Bonus for consecutive correct characters</p>
+                <p>- <strong>Score</strong>: Based on speed, accuracy and combos</p>
+            </div>
+            <button id="close-help-btn" class="btn primary">GOT IT!</button>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="correct-sound" src="push.mp3" preload="auto"></audio>
+    <audio id="wrong-sound" src="pop.mp3" preload="auto"></audio>
+    <audio id="complete-sound" src="complete.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
