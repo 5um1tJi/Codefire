@@ -116,6 +116,54 @@ document.addEventListener('DOMContentLoaded', function() {
                 "constexpr int factorial(int n) {\n    return (n <= 1) ? 1 : n * factorial(n - 1);\n}",
                 "#include <string>\n#include <regex>\n\nbool validate_email(const std::string& email) {\n    const std::regex pattern(\"(\\\\w+)(\\\\.|_)?(\\\\w*)@(\\\\w+)(\\\\.(\\\\w+))+\");\n    return std::regex_match(email, pattern);\n}",
                 "namespace Math {\n    constexpr double PI = 3.141592653589793;\n    \n    double circle_area(double radius) {\n        return PI * radius * radius;\n    }\n}"
+            ],
+            golang: [
+                "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}",
+                "type Person struct {\n    Name string\n    Age  int\n}\n\nfunc (p Person) Greet() {\n    fmt.Printf(\"Hello, my name is %s\\n\", p.Name)\n}",
+                "func factorial(n int) int {\n    if n == 0 {\n        return 1\n    }\n    return n * factorial(n-1)\n}",
+                "func main() {\n    nums := []int{1, 2, 3, 4, 5}\n    for i, num := range nums {\n        fmt.Printf(\"%d: %d\\n\", i, num)\n    }\n}",
+                "func fetchData(url string) (string, error) {\n    resp, err := http.Get(url)\n    if err != nil {\n        return \"\", err\n    }\n    defer resp.Body.Close()\n    body, _ := io.ReadAll(resp.Body)\n    return string(body), nil\n}"
+            ],
+            html: [
+                "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n</body>\n</html>",
+                "<div class=\"container\">\n  <header>\n    <nav>\n      <ul>\n        <li><a href=\"#home\">Home</a></li>\n        <li><a href=\"#about\">About</a></li>\n      </ul>\n    </nav>\n  </header>\n</div>",
+                "<form action=\"/submit\" method=\"post\">\n  <label for=\"username\">Username:</label>\n  <input type=\"text\" id=\"username\" name=\"username\">\n  <button type=\"submit\">Submit</button>\n</form>",
+                "<table>\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>Alice</td>\n    <td>25</td>\n  </tr>\n</table>",
+                "<article>\n  <h2>Blog Post</h2>\n  <p>Published on <time datetime=\"2023-05-15\">May 15</time></p>\n  <p>Content goes here...</p>\n</article>"
+            ],
+            java: [
+                "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}",
+                "public class Calculator {\n    public int add(int a, int b) {\n        return a + b;\n    }\n}",
+                "import java.util.ArrayList;\n\npublic class Example {\n    public static void main(String[] args) {\n        ArrayList<String> list = new ArrayList<>();\n        list.add(\"Java\");\n        System.out.println(list.get(0));\n    }\n}",
+                "public abstract class Animal {\n    public abstract void makeSound();\n}\n\nclass Dog extends Animal {\n    public void makeSound() {\n        System.out.println(\"Woof!\");\n    }\n}",
+                "interface Drawable {\n    void draw();\n}\n\nclass Circle implements Drawable {\n    public void draw() {\n        System.out.println(\"Drawing circle\");\n    }\n}",
+                "import java.util.stream.IntStream;\n\npublic class StreamExample {\n    public static void main(String[] args) {\n        IntStream.range(1, 5).forEach(System.out::println);\n    }\n}",
+                "public class Fibonacci {\n    public static int fib(int n) {\n        if (n <= 1) return n;\n        return fib(n-1) + fib(n-2);\n    }\n}",
+                "import java.util.HashMap;\n\npublic class MapExample {\n    public static void main(String[] args) {\n        HashMap<String, Integer> map = new HashMap<>();\n        map.put(\"one\", 1);\n        System.out.println(map.get(\"one\"));\n    }\n}",
+                "public class Singleton {\n    private static Singleton instance;\n    \n    private Singleton() {}\n    \n    public static Singleton getInstance() {\n        if (instance == null) {\n            instance = new Singleton();\n        }\n        return instance;\n    }\n}"
+            ],
+            php: [
+                "<?php\n$name = 'Alice';\necho \"Hello, $name!\";\n?>",
+                "<?php\nfunction factorial($n) {\n    return ($n <= 1) ? 1 : $n * factorial($n - 1);\n}\n?>",
+                "<?php\nclass User {\n    private $name;\n    \n    public function __construct($name) {\n        $this->name = $name;\n    }\n    \n    public function greet() {\n        return \"Hello, \" . $this->name;\n    }\n}\n?>",
+                "<?php\n$numbers = [1, 2, 3, 4, 5];\n$squared = array_map(function($n) { return $n * $n; }, $numbers);\n?>",
+                "<?php\ntry {\n    $db = new PDO('mysql:host=localhost;dbname=test', 'user', 'pass');\n} catch (PDOException $e) {\n    die('Connection failed: ' . $e->getMessage());\n}\n?>",
+                "<?php\ninterface Logger {\n    public function log($message);\n}\n\nclass FileLogger implements Logger {\n    public function log($message) {\n        file_put_contents('log.txt', $message, FILE_APPEND);\n    }\n}\n?>",
+                "<?php\n$users = [\n    ['name' => 'Alice', 'age' => 25],\n    ['name' => 'Bob', 'age' => 30]\n];\n\nusort($users, function($a, $b) {\n    return $a['age'] <=> $b['age'];\n});\n?>",
+                "<?php\n$router->get('/users', function() {\n    return User::all();\n});\n\n$router->post('/users', function($request) {\n    return User::create($request->getBody());\n});\n?>",
+                "<?php\n$client = new GuzzleHttp\\Client();\n$response = $client->request('GET', 'https://api.example.com/users');\n$users = json_decode($response->getBody());\n?>"
+            ],
+            ruby: [
+                "class Greeter\n    def initialize(name)\n        @name = name\n    end\n    \n    def greet\n        puts \"Hello, #{@name}!\"\n    end\nend",
+                "5.times do |i|\n    puts \"Iteration #{i}\"\nend",
+                "numbers = [1, 2, 3, 4, 5]\nsquares = numbers.map { |n| n ** 2 }",
+                "def fibonacci(n)\n    n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2)\nend",
+                "class Animal\n    def speak\n        puts \"Animal sound\"\n    end\nend\n\nclass Dog < Animal\n    def speak\n        puts \"Woof!\"\n    end\nend",
+                "person = { name: 'Alice', age: 25 }\nputs person[:name]",
+                "module MathHelper\n    def self.square(x)\n        x * x\n    end\nend",
+                "require 'json'\n\njson_string = '{\"name\":\"Alice\"}'\ndata = JSON.parse(json_string)",
+                "RSpec.describe Calculator do\n    describe '#add' do\n        it 'returns sum of two numbers' do\n            expect(Calculator.new.add(2, 3)).to eq(5)\n        end\n    end\nend",
+                "class ApiClient\n    include HTTParty\n    base_uri 'api.example.com'\n    \n    def get_users\n        self.class.get('/users')\n    end\nend"
             ]
             // ... other languages ...
         };
