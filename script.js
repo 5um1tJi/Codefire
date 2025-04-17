@@ -171,6 +171,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 "fn factorial(n: u32) -> u32 {\n    match n {\n        0 => 1,\n        _ => n * factorial(n - 1),\n    }\n}",
                 "let numbers = vec![1, 2, 3, 4, 5];\nlet squared: Vec<_> = numbers.iter().map(|n| n * n).collect();",
                 "trait Greet {\n    fn greet(&self);\n}\n\nstruct Person;\n\nimpl Greet for Person {\n    fn greet(&self) {\n        println!(\"Hello!\");\n    }\n}"
+            ],
+            sql: [
+                "SELECT * FROM users WHERE age > 18;",
+                "INSERT INTO products (name, price) VALUES ('Laptop', 999.99);",
+                "UPDATE employees SET salary = salary * 1.1 WHERE department = 'Engineering';",
+                "CREATE TABLE users (\n    id INT PRIMARY KEY AUTO_INCREMENT,\n    username VARCHAR(50) NOT NULL,\n    email VARCHAR(100) UNIQUE NOT NULL\n);",
+                "SELECT u.username, COUNT(o.id) as order_count\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nGROUP BY u.id;",
+                "BEGIN TRANSACTION;\nINSERT INTO accounts (user_id, balance) VALUES (1, 1000);\nUPDATE accounts SET balance = balance - 100 WHERE user_id = 2;\nCOMMIT;",
+                "CREATE INDEX idx_user_email ON users(email);",
+                "WITH ranked_products AS (\n    SELECT \n        product_id,\n        name,\n        price,\n        RANK() OVER (ORDER BY price DESC) as price_rank\n    FROM products\n)\nSELECT * FROM ranked_products WHERE price_rank <= 5;",
+                "ALTER TABLE employees ADD COLUMN hire_date DATE;",
+                "EXPLAIN ANALYZE SELECT * FROM orders WHERE created_at > '2023-01-01';"
             ]
 
             // ... other languages ...
