@@ -164,7 +164,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 "require 'json'\n\njson_string = '{\"name\":\"Alice\"}'\ndata = JSON.parse(json_string)",
                 "RSpec.describe Calculator do\n    describe '#add' do\n        it 'returns sum of two numbers' do\n            expect(Calculator.new.add(2, 3)).to eq(5)\n        end\n    end\nend",
                 "class ApiClient\n    include HTTParty\n    base_uri 'api.example.com'\n    \n    def get_users\n        self.class.get('/users')\n    end\nend"
+            ],
+            rust: [
+                "fn main() {\n    println!(\"Hello, world!\");\n}",
+                "struct Point {\n    x: i32,\n    y: i32,\n}\n\nimpl Point {\n    fn new(x: i32, y: i32) -> Self {\n        Self { x, y }\n    }\n}",
+                "fn factorial(n: u32) -> u32 {\n    match n {\n        0 => 1,\n        _ => n * factorial(n - 1),\n    }\n}",
+                "let numbers = vec![1, 2, 3, 4, 5];\nlet squared: Vec<_> = numbers.iter().map(|n| n * n).collect();",
+                "trait Greet {\n    fn greet(&self);\n}\n\nstruct Person;\n\nimpl Greet for Person {\n    fn greet(&self) {\n        println!(\"Hello!\");\n    }\n}"
             ]
+
             // ... other languages ...
         };
 
