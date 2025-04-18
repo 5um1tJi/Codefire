@@ -97,10 +97,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hardcoded snippets for demo purposes
         const snippets = {
             javascript: [
-                "function greet(name) {\n  return `Hello, ${name}!`;\n}",
-                "const numbers = [1, 2, 3];\nconst doubled = numbers.map(n => n * 2);",
-                "class Person {\n  constructor(name) {\n    this.name = name;\n  }\n\n  greet() {\n    console.log(`Hello, ${this.name}`);\n  }\n}"
-            ],
+                "function greetUser(username) {\n  if (!username) {\n    throw new Error('Username is required');\n  }\n  return `Hello, ${username}!`;\n}",
+                "const fruits = ['apple', 'banana', 'cherry'];\nfruits.forEach(fruit => console.log(fruit));",
+                "class Car {\n  constructor(brand) {\n    this.brand = brand;\n  }\n\n  honk() {\n    console.log(`${this.brand} goes beep!`);\n  }\n}",
+                "async function fetchData(url) {\n  try {\n    const response = await fetch(url);\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error('Error:', error);\n  }\n}",
+                "const user = {\n  name: 'Alice',\n  age: 30,\n  greet() {\n    console.log(`Hi, I'm ${this.name}`);\n  }\n};",
+                "export function multiply(a, b) {\n  return a * b;\n}",
+                "import { readFile } from 'fs/promises';\nconst content = await readFile('file.txt', 'utf-8');",
+                "const settings = {\n  theme: 'dark',\n  notifications: true,\n  language: 'en'\n};",
+                "document.querySelectorAll('button').forEach(btn => btn.disabled = false);",
+                "const numbers = [5, 10, 15];\nconst total = numbers.reduce((sum, n) => sum + n, 0);",
+                "function* idGenerator() {\n  let id = 0;\n  while (true) {\n    yield id++;\n  }\n}",
+                "const regex = /^[a-z0-9]+@[a-z]+\\.[a-z]{2,3}$/;\nconsole.log(regex.test('user@example.com'));",
+                "setTimeout(() => {\n  console.log('Time\'s up!');\n}, 2000);",
+                "const map = new Map();\nmap.set('key', 'value');\nconsole.log(map.get('key'));",
+                "(() => {\n  const message = 'Immediately Invoked Function Expression';\n  console.log(message);\n})();"
+              ],
             python: [
                 "def greet(name):\n    return f\"Hello, {name}!\"",
                 "numbers = [1, 2, 3]\nsquared = [x**2 for x in numbers]",
@@ -203,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
         snippet.split('').forEach(char => {
             const span = document.createElement('span');
             // Replace special characters with visible symbols
-            span.textContent = char === '\n' ? '↵\n' : 
+            span.textContent = char === '\n' ? '\n' : 
                              char === '\t' ? '⇥' : 
                              char === ' ' ? ' ' : char;
             codeDisplay.appendChild(span);
