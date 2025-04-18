@@ -115,9 +115,21 @@ document.addEventListener('DOMContentLoaded', function() {
               ],
             python: [
                 "def greet(name):\n    return f\"Hello, {name}!\"",
-                "numbers = [1, 2, 3]\nsquared = [x**2 for x in numbers]",
-                "class Person:\n    def __init__(self, name):\n        self.name = name\n\n    def greet(self):\n        print(f\"Hello, {self.name}\")"
-            ],
+                "numbers = [1, 2, 3, 4]\nsquares = [n ** 2 for n in numbers]",
+                "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        print(f\"{self.name} makes a sound\")",
+                "try:\n    result = 10 / 0\nexcept ZeroDivisionError as e:\n    print(\"Cannot divide by zero:\", e)",
+                "import math\narea = math.pi * (5 ** 2)",
+                "with open('data.txt', 'r') as file:\n    content = file.read()",
+                "def fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        print(a, end=' ')\n        a, b = b, a + b",
+                "names = {'Alice': 25, 'Bob': 30}\nfor name, age in names.items():\n    print(f\"{name} is {age} years old\")",
+                "def factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)",
+                "lambda_func = lambda x: x * 2\nprint(lambda_func(4))",
+                "from dataclasses import dataclass\n\n@dataclass\nclass Point:\n    x: int\n    y: int",
+                "def decorator(func):\n    def wrapper(*args, **kwargs):\n        print(\"Before function call\")\n        result = func(*args, **kwargs)\n        print(\"After function call\")\n        return result\n    return wrapper",
+                "nums = [3, 6, 9, 12]\nfiltered = list(filter(lambda x: x % 3 == 0, nums))",
+                "class CustomError(Exception):\n    pass\n\nraise CustomError(\"Something went wrong\")",
+                "def generator():\n    yield 1\n    yield 2\n    yield 3\n\nfor value in generator():\n    print(value)"
+              ],
             cpp: [
                 "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\" << std::endl;\n    return 0;\n}",
                 "class Rectangle {\n    int width, height;\npublic:\n    Rectangle(int w, int h) : width(w), height(h) {}\n    int area() { return width * height; }\n};",
