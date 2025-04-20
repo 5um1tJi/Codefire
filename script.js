@@ -159,12 +159,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 "switch day := \"Monday\"; day {\ncase \"Monday\":\n    fmt.Println(\"Start of the week\")\ncase \"Friday\":\n    fmt.Println(\"Weekend is near\")\ndefault:\n    fmt.Println(\"Just another day\")\n}"
               ],
             html: [
-                "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n</body>\n</html>",
-                "<div class=\"container\">\n  <header>\n    <nav>\n      <ul>\n        <li><a href=\"#home\">Home</a></li>\n        <li><a href=\"#about\">About</a></li>\n      </ul>\n    </nav>\n  </header>\n</div>",
-                "<form action=\"/submit\" method=\"post\">\n  <label for=\"username\">Username:</label>\n  <input type=\"text\" id=\"username\" name=\"username\">\n  <button type=\"submit\">Submit</button>\n</form>",
-                "<table>\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>Alice</td>\n    <td>25</td>\n  </tr>\n</table>",
-                "<article>\n  <h2>Blog Post</h2>\n  <p>Published on <time datetime=\"2023-05-15\">May 15</time></p>\n  <p>Content goes here...</p>\n</article>"
-            ],
+                "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n</body>\n</html>",
+                "<h1>Welcome to My Website</h1>",
+                "<a href=\"https://example.com\" target=\"_blank\">Visit Example</a>",
+                "<img src=\"image.jpg\" alt=\"Sample Image\" width=\"300\" height=\"200\">",
+                "<p>This is a <strong>paragraph</strong> with <em>emphasis</em>.</p>",
+                "<ul>\n  <li>Item One</li>\n  <li>Item Two</li>\n  <li>Item Three</li>\n</ul>",
+                "<ol>\n  <li>First</li>\n  <li>Second</li>\n</ol>",
+                "<form action=\"/submit\" method=\"POST\">\n  <input type=\"text\" name=\"username\" placeholder=\"Enter name\">\n  <input type=\"submit\" value=\"Submit\">\n</form>",
+                "<input type=\"checkbox\" id=\"agree\">\n<label for=\"agree\">I agree to the terms</label>",
+                "<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Alice</td><td>25</td></tr>\n</table>",
+                "<div class=\"container\">\n  <p>Content goes here</p>\n</div>",
+                "<header>\n  <h1>Site Title</h1>\n</header>",
+                "<nav>\n  <a href=\"#home\">Home</a>\n  <a href=\"#about\">About</a>\n</nav>",
+                "<section>\n  <h2>About Us</h2>\n  <p>We build cool stuff.</p>\n</section>",
+                "<video width=\"320\" height=\"240\" controls>\n  <source src=\"movie.mp4\" type=\"video/mp4\">\n  Your browser does not support the video tag.\n</video>"
+              ],
             java: [
                 "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}",
                 "public class Calculator {\n    public int add(int a, int b) {\n        return a + b;\n    }\n}",
