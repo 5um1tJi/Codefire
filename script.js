@@ -142,12 +142,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 "namespace Math {\n    constexpr double PI = 3.141592653589793;\n    \n    double circle_area(double radius) {\n        return PI * radius * radius;\n    }\n}"
             ],
             golang: [
-                "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}",
-                "type Person struct {\n    Name string\n    Age  int\n}\n\nfunc (p Person) Greet() {\n    fmt.Printf(\"Hello, my name is %s\\n\", p.Name)\n}",
-                "func factorial(n int) int {\n    if n == 0 {\n        return 1\n    }\n    return n * factorial(n-1)\n}",
-                "func main() {\n    nums := []int{1, 2, 3, 4, 5}\n    for i, num := range nums {\n        fmt.Printf(\"%d: %d\\n\", i, num)\n    }\n}",
-                "func fetchData(url string) (string, error) {\n    resp, err := http.Get(url)\n    if err != nil {\n        return \"\", err\n    }\n    defer resp.Body.Close()\n    body, _ := io.ReadAll(resp.Body)\n    return string(body), nil\n}"
-            ],
+                "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, Go!\")\n}",
+                "func add(a int, b int) int {\n    return a + b\n}",
+                "var name string = \"Gopher\"\nvar age int = 10",
+                "numbers := []int{1, 2, 3, 4}\nfor i, num := range numbers {\n    fmt.Println(i, num)\n}",
+                "type Person struct {\n    Name string\n    Age  int\n}",
+                "func (p Person) Greet() {\n    fmt.Printf(\"Hi, I'm %s and I'm %d years old.\\n\", p.Name, p.Age)\n}",
+                "if x := 10; x > 5 {\n    fmt.Println(\"x is greater than 5\")\n}",
+                "m := map[string]int{\"Alice\": 30, \"Bob\": 25}\nfmt.Println(m[\"Alice\"])",
+                "defer fmt.Println(\"This will run last\")\nfmt.Println(\"Start\")",
+                "result, err := divide(10, 2)\nif err != nil {\n    fmt.Println(\"Error:\", err)\n}",
+                "func divide(a, b int) (int, error) {\n    if b == 0 {\n        return 0, fmt.Errorf(\"division by zero\")\n    }\n    return a / b, nil\n}",
+                "ch := make(chan int)\ngo func() {\n    ch <- 42\n}()\nfmt.Println(<-ch)",
+                "for i := 0; i < 5; i++ {\n    fmt.Println(\"Counting:\", i)\n}",
+                "const Pi = 3.1415\nconst Greeting = \"Hello\"",
+                "switch day := \"Monday\"; day {\ncase \"Monday\":\n    fmt.Println(\"Start of the week\")\ncase \"Friday\":\n    fmt.Println(\"Weekend is near\")\ndefault:\n    fmt.Println(\"Just another day\")\n}"
+              ],
             html: [
                 "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n</body>\n</html>",
                 "<div class=\"container\">\n  <header>\n    <nav>\n      <ul>\n        <li><a href=\"#home\">Home</a></li>\n        <li><a href=\"#about\">About</a></li>\n      </ul>\n    </nav>\n  </header>\n</div>",
