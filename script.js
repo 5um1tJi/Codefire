@@ -210,12 +210,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 "class ApiClient\n    include HTTParty\n    base_uri 'api.example.com'\n    \n    def get_users\n        self.class.get('/users')\n    end\nend"
             ],
             rust: [
-                "fn main() {\n    println!(\"Hello, world!\");\n}",
-                "struct Point {\n    x: i32,\n    y: i32,\n}\n\nimpl Point {\n    fn new(x: i32, y: i32) -> Self {\n        Self { x, y }\n    }\n}",
-                "fn factorial(n: u32) -> u32 {\n    match n {\n        0 => 1,\n        _ => n * factorial(n - 1),\n    }\n}",
-                "let numbers = vec![1, 2, 3, 4, 5];\nlet squared: Vec<_> = numbers.iter().map(|n| n * n).collect();",
-                "trait Greet {\n    fn greet(&self);\n}\n\nstruct Person;\n\nimpl Greet for Person {\n    fn greet(&self) {\n        println!(\"Hello!\");\n    }\n}"
-            ],
+                "fn main() {\n    println!(\"Hello, Rust!\");\n}",
+                "let x: i32 = 42;\nlet y = x + 8;\nprintln!(\"{}\", y);",
+                "fn add(a: i32, b: i32) -> i32 {\n    a + b\n}",
+                "let nums = vec![1, 2, 3];\nfor num in &nums {\n    println!(\"{}\", num);\n}",
+                "struct Point {\n    x: f64,\n    y: f64,\n}",
+                "impl Point {\n    fn distance(&self) -> f64 {\n        (self.x * self.x + self.y * self.y).sqrt()\n    }\n}",
+                "enum Direction {\n    North,\n    South,\n    East,\n    West,\n}",
+                "fn print_direction(dir: Direction) {\n    match dir {\n        Direction::North => println!(\"Up\"),\n        Direction::South => println!(\"Down\"),\n        _ => println!(\"Left or Right\"),\n    }\n}",
+                "let name = String::from(\"Rustacean\");\nlet greeting = format!(\"Hello, {}!\", name);",
+                "fn takes_ownership(s: String) {\n    println!(\"{}\", s);\n}",
+                "fn gives_ownership() -> String {\n    String::from(\"Owned\")\n}",
+                "fn borrow_str(s: &str) {\n    println!(\"{}\", s);\n}",
+                "fn largest<T: PartialOrd>(list: &[T]) -> &T {\n    let mut largest = &list[0];\n    for item in list {\n        if item > largest {\n            largest = item;\n        }\n    }\n    largest\n}",
+                "use std::fs::File;\nuse std::io::Error;\n\nfn open_file() -> Result<File, Error> {\n    File::open(\"data.txt\")\n}",
+                "#[derive(Debug)]\nstruct User {\n    username: String,\n    email: String,\n}"
+              ],
             sql: [
                 "SELECT * FROM users WHERE age > 18;",
                 "INSERT INTO products (name, price) VALUES ('Laptop', 999.99);",
