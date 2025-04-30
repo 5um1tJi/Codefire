@@ -237,7 +237,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 "WITH ranked_products AS (\n    SELECT \n        product_id,\n        name,\n        price,\n        RANK() OVER (ORDER BY price DESC) as price_rank\n    FROM products\n)\nSELECT * FROM ranked_products WHERE price_rank <= 5;",
                 "ALTER TABLE employees ADD COLUMN hire_date DATE;",
                 "EXPLAIN ANALYZE SELECT * FROM orders WHERE created_at > '2023-01-01';"
-            ]
+            ],
+            swift: [
+                "let message = \"Hello, Swift!\"\nprint(message)",
+                "func greet(name: String) -> String {\n    return \"Hello, \\(name)!\"\n}",
+                "var numbers = [1, 2, 3, 4, 5]\nlet doubled = numbers.map { $0 * 2 }",
+                "class Person {\n    var name: String\n    init(name: String) {\n        self.name = name\n    }\n    func sayHello() {\n        print(\"Hi, I'm \\(name)\")\n    }\n}",
+                "struct Point {\n    var x: Double\n    var y: Double\n}",
+                "enum Direction {\n    case north, south, east, west\n}",
+                "let direction: Direction = .north\nswitch direction {\ncase .north: print(\"Going up\")\ncase .south: print(\"Going down\")\ndefault: print(\"Sideways\")\n}",
+                "protocol Greetable {\n    func greet() -> String\n}",
+                "extension String {\n    func shout() -> String {\n        return self.uppercased()\n    }\n}",
+                "let optionalName: String? = \"Swift\"\nif let name = optionalName {\n    print(\"Hello, \\(name)\")\n}",
+                "let square: (Int) -> Int = { num in\n    return num * num\n}",
+                "for i in 1...5 {\n    print(i)\n}",
+                "let age = 18\nlet isAdult = age >= 18 ? \"Yes\" : \"No\"",
+                "guard let text = optionalName else {\n    print(\"No name\")\n    return\n}",
+                "do {\n    let data = try String(contentsOfFile: \"file.txt\")\n    print(data)\n} catch {\n    print(\"Error reading file\")\n}"
+              ],
 
             // ... other languages ...
         };
